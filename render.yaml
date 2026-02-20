@@ -7,3 +7,23 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: SLACK_SIGNING_SECRET
+        sync: false
+      - key: AUTHORIZED_SLACK_USER_IDS
+        sync: false
+      - key: SNOWFLAKE_ACCOUNT
+        sync: false
+      - key: SNOWFLAKE_USER
+        sync: false
+      - key: SNOWFLAKE_PASSWORD
+        sync: false
+      - key: SNOWFLAKE_WAREHOUSE
+        value: COMPUTE_WH
+      - key: SNOWFLAKE_DATABASE
+        value: SNOWFLAKE_LEARNING_DB
+      - key: SNOWFLAKE_SCHEMA
+        value: PUBLIC
+      - key: SNOWFLAKE_ROLE
+        value: SYSADMIN
+      - key: MOCK_SNOWFLAKE
+        value: false
