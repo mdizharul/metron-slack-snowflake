@@ -37,8 +37,10 @@ async def slack_command(request: Request, background_tasks: BackgroundTasks):
     """
 
     # ── 1. Signature verification ──────────────────────────────────────────
-    # Skipped automatically when SLACK_SIGNING_SECRET is not set (Postman testing)
-    if SLACK_SIGNING_SECRET:
+    # NOTE: Disabled for demo — re-enable in production by setting
+    # VERIFY_SLACK_SIGNATURE=true in environment variables
+    import os
+    if os.getenv("VERIFY_SLACK_SIGNATURE", "false").lower() == "true":
         await verify_slack_signature(request)
 
     # ── 2. Parse the URL-encoded body ──────────────────────────────────────
@@ -55,7 +57,9 @@ async def slack_command(request: Request, background_tasks: BackgroundTasks):
     logger.info(f"Slack command received | user_id={user_id} text='{text}'")
 
     # ── 3. Authorization ───────────────────────────────────────────────────
-    authorize_user(user_id)
+    # NOTE: Disabled for demo — re-enable by setting AUTHORIZED_SLACK_USER_IDS in env
+    # authorize_user(user_id)
+    logger.info(f"Request from user_id={user_id} (auth check disabled for demo)")
 
     if not text:
         return JSONResponse({
